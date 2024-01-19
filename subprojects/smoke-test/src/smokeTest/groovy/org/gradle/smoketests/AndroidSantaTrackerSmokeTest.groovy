@@ -128,6 +128,7 @@ class AndroidSantaTrackerLintSmokeTest extends AndroidSantaTrackerSmokeTest {
             }
             maybeExpectOrgGradleUtilGUtilDeprecation(agpVersion)
             expectAndroidBasePluginExtensionArchivesBaseNameDeprecation(VersionNumber.parse(agpVersion))
+            expectConfigurationMutationDeprecationWarning(agpVersion, lintMutatedConfigurations)
         }
         def result = runner.buildAndFail()
 
@@ -149,6 +150,7 @@ class AndroidSantaTrackerLintSmokeTest extends AndroidSantaTrackerSmokeTest {
                 expectBuildIdentifierIsCurrentBuildDeprecation(agpVersion)
                 expectAndroidBasePluginExtensionArchivesBaseNameDeprecation(VersionNumber.parse(agpVersion))
                 expectClientModuleDeprecationWarning(agpVersion)
+                expectConfigurationMutationDeprecationWarning(agpVersion, lintMutatedConfigurations)
             }
         }
         result = runner.buildAndFail()
@@ -159,6 +161,23 @@ class AndroidSantaTrackerLintSmokeTest extends AndroidSantaTrackerSmokeTest {
 
         where:
         agpVersion << TESTED_AGP_VERSIONS
+    }
+
+    private ArrayList<String> getLintMutatedConfigurations() {
+        [
+            ":common:debugCompileClasspath",
+            ":common:debugAndroidTestRuntimeClasspath",
+            ":doodles-lib:debugAndroidTestRuntimeClasspath",
+            ":doodles-lib:debugCompileClasspath",
+            ":playgames:debugAndroidTestRuntimeClasspath",
+            ":playgames:debugCompileClasspath",
+            ":common:debugAndroidTestCompileClasspath",
+            ":common:debugUnitTestCompileClasspath",
+            ":doodles-lib:debugAndroidTestCompileClasspath",
+            ":doodles-lib:debugUnitTestCompileClasspath",
+            ":playgames:debugAndroidTestCompileClasspath",
+            ":playgames:debugUnitTestCompileClasspath"
+        ]
     }
 }
 
