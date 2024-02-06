@@ -25,13 +25,6 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
-import org.gradle.api.problems.internal.DocLink;
-import org.gradle.api.problems.internal.FileLocation;
-import org.gradle.api.problems.internal.LineInFileLocation;
-import org.gradle.api.problems.internal.OffsetInFileLocation;
-import org.gradle.api.problems.internal.Problem;
-import org.gradle.api.problems.internal.ProblemCategory;
-import org.gradle.api.problems.internal.ProblemLocation;
 import org.gradle.api.problems.internal.DefaultFileLocation;
 import org.gradle.api.problems.internal.DefaultLineInFileLocation;
 import org.gradle.api.problems.internal.DefaultOffsetInFileLocation;
@@ -39,6 +32,13 @@ import org.gradle.api.problems.internal.DefaultPluginIdLocation;
 import org.gradle.api.problems.internal.DefaultProblem;
 import org.gradle.api.problems.internal.DefaultProblemCategory;
 import org.gradle.api.problems.internal.DefaultTaskPathLocation;
+import org.gradle.api.problems.internal.DocLink;
+import org.gradle.api.problems.internal.FileLocation;
+import org.gradle.api.problems.internal.LineInFileLocation;
+import org.gradle.api.problems.internal.OffsetInFileLocation;
+import org.gradle.api.problems.internal.Problem;
+import org.gradle.api.problems.internal.ProblemCategory;
+import org.gradle.api.problems.internal.ProblemLocation;
 import org.gradle.internal.reflect.validation.TypeValidationProblemRenderer;
 
 import javax.annotation.Nonnull;
@@ -284,7 +284,7 @@ public class ValidationProblemSerialization {
             } else if (subtype.equals("offsetInFile")) {
                 return DefaultOffsetInFileLocation.from(path, offset, length);
             } else {
-                return DefaultFileLocation.from(path);
+                return DefaultFileLocation.from(path, offset, length);
             }
         }
     }
