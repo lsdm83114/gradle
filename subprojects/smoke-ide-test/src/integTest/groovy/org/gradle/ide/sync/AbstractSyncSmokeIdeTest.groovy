@@ -46,6 +46,10 @@ import java.util.function.Consumer
  */
 abstract class AbstractSyncSmokeIdeTest extends AbstractIntegrationSpec {
 
+    private static String INTELLIJ_COMMUNITY_TYPE = "IC"
+
+    private static String ANDROID_STUDIO_TYPE = "AI"
+
     private final Path ideHome = buildContext.gradleUserHomeDir.file("ide").toPath()
 
     protected StudioBuildInvocationResult syncResult
@@ -67,7 +71,7 @@ abstract class AbstractSyncSmokeIdeTest extends AbstractIntegrationSpec {
             syncInvocationSettingsBuilder(getIdeInstallDirFromSystemProperty("studioHome")).build()
 
         sync(
-            "AI",
+            ANDROID_STUDIO_TYPE,
             version,
             null,
             ideHome,
@@ -91,7 +95,7 @@ abstract class AbstractSyncSmokeIdeTest extends AbstractIntegrationSpec {
             syncInvocationSettingsBuilder(getIdeInstallDirFromSystemProperty("ideaHome")).build()
 
         sync(
-            "IC",
+            INTELLIJ_COMMUNITY_TYPE,
             version,
             buildType,
             ideHome,
