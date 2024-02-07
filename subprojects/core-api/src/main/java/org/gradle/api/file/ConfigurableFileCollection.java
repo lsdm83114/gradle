@@ -117,7 +117,7 @@ public interface ConfigurableFileCollection extends FileCollection, HasConfigura
     ConfigurableFileCollection builtBy(Object... tasks);
 
     /**
-     * Applies an eager transformation to the current contents of this file collection, without explicitly resolving it.
+     * Replaces the current contents of this file collection with a one computed by the provided transform.
      * The provided transformer is applied to the file collection representing the current contents, and the returned collection is used as a new content.
      * The current contents collection can be used to derive the new value, but doesn't have to.
      * Returning null from the transformer empties this collection.
@@ -125,12 +125,12 @@ public interface ConfigurableFileCollection extends FileCollection, HasConfigura
      * <pre class='autoTested'>
      *     def collection = files("a.txt", "b.md")
      *
-     *     collection.update { it.filter { f -&gt; !f.name.endsWith(".txt") } }
+     *     collection.replace { it.filter { f -&gt; !f.name.endsWith(".txt") } }
      *
      *     println(collection.files) // ["b.md"]
      * </pre>
      * <p>
-     * <b>Further changes to this file collection, such as calls to {@link #setFrom(Object...)} or {@link #from(Object...)}, are not transformed, and override the update instead</b>.
+     * <b>Further changes to this file collection, such as calls to {@link #setFrom(Object...)} or {@link #from(Object...)}, are not transformed, and override the replacement instead</b>.
      * Because of this, this method inherently depends on the order of changes, and therefore must be used sparingly.
      * <p>
      * If this file collection consists of other mutable sources, then the current contents collection tracks the changes to these sources.
@@ -139,7 +139,7 @@ public interface ConfigurableFileCollection extends FileCollection, HasConfigura
      *     def upstream = files("a.txt", "b.md")
      *     def collection = files(upstream)
      *
-     *     collection.update { it.filter { f -&gt; !f.name.endsWith(".txt") } }
+     *     collection.replace { it.filter { f -&gt; !f.name.endsWith(".txt") } }
      *     upstream.from("c.md", "d.txt")
      *
      *     println(collection.files) // ["b.md", "c.md"]
@@ -150,10 +150,10 @@ public interface ConfigurableFileCollection extends FileCollection, HasConfigura
      * The current contents collection inherits dependencies of this collection specified by {@link #builtBy(Object...)}.
      *
      * @param transform the transformation to apply to the current value. May return null, which empties this collection.
-     * @since 8.6
+     * @since 8.7
      */
     @Incubating
-    void update(Transformer<? extends @org.jetbrains.annotations.Nullable FileCollection, ? super FileCollection> transform);
+    void replace(Transformer<? extends @org.jetbrains.annotations.Nullable FileCollection, ? super FileCollection> transform);
 
     /**
      * Performs incremental updates to the actual value of this file collection.
