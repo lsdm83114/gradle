@@ -84,6 +84,34 @@ gradle init --use-defaults --type kotlin-library --no-comments
 
 It is possible to persist the preference by setting the `org.gradle.buildinit.comments` property to `false`.
 
+<a name="update-api"></a>
+#### New `update()` API allows safe self-referencing lazy properties
+
+[Lazy configuration](userguide/lazy_configuration.html) delays calculating a property’s value until it is required for the build.
+This can lead to accidental recursions when assigning property values of an object to itself:
+
+```
+var property = objects.property<String>()
+property.set("some value")
+property.set(property.map { "$it and more" })
+
+// Circular evaluation detected (or StackOverflowError, before 8.6)
+println(property.get()) // "some value and more"
+```
+
+Previously, Gradle did not support circular references when evaluating lazy properties.
+
+[`Property`](javadoc/org/gradle/api/provider/Property.html#update-org.gradle.api.Transformer-) and [`ConfigurableFileCollection`](javadoc/org/gradle/api/file/ConfigurableFileCollection.html#update-org.gradle.api.Transformer-) now provide their respective `update(Transformer<...>)` methods which allow self-referencing updates safely:
+
+```
+var property = objects.property<String>()
+property.set("some value")
+property.update { it.map { "$it and more" } }
+
+println(property.get()) // "some value and more"
+```
+
+Refer to the javadoc for [`Property.update(Transformer<>)`](javadoc/org/gradle/api/provider/Property.html#update-org.gradle.api.Transformer-) and [`ConfigurableFileCollection.update(Transformer<>)`](javadoc/org/gradle/api/file/ConfigurableFileCollection.html#update-org.gradle.api.Transformer-) for more details, including limitations.
 
 <!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ADD RELEASE FEATURES ABOVE
