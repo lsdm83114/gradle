@@ -46,9 +46,9 @@ import java.util.function.Consumer
  */
 abstract class AbstractSyncSmokeIdeTest extends AbstractIntegrationSpec {
 
-    private static String INTELLIJ_COMMUNITY_TYPE = "IC"
+    private static final String INTELLIJ_COMMUNITY_TYPE = "IC"
 
-    private static String ANDROID_STUDIO_TYPE = "AI"
+    private static final String ANDROID_STUDIO_TYPE = "AI"
 
     private final Path ideHome = buildContext.gradleUserHomeDir.file("ide").toPath()
 
