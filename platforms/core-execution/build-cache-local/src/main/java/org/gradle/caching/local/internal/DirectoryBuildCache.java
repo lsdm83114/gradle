@@ -41,7 +41,6 @@ import java.util.function.Consumer;
 
 @NonNullApi
 public class DirectoryBuildCache implements BuildCacheTempFileStore, Closeable, LocalBuildCache {
-
     private final PathKeyFileStore fileStore;
     private final PersistentCache persistentCache;
     private final BuildCacheTempFileStore tempFileStore;
