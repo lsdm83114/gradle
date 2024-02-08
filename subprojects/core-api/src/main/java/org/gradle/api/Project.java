@@ -428,6 +428,15 @@ public interface Project extends Comparable<Project>, ExtensionAware, PluginAwar
     Project getProject();
 
     /**
+     * <p>Returns an immutable view of this project, safe for use with isolated projects.</p>
+     *
+     * @return This project as an {@link IsolatedProject}. Never returns null.
+     * @since 8.7
+     */
+    @Incubating
+    IsolatedProject getIsolated();
+
+    /**
      * <p>Returns the set containing this project and its subprojects.</p>
      *
      * @return The set of projects.

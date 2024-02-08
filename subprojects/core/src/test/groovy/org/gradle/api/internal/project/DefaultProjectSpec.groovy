@@ -100,6 +100,20 @@ class DefaultProjectSpec extends Specification {
         1 * project.artifacts.add('foo', 'bar')
     }
 
+    def "can view as an IsolatedProject"() {
+        given:
+        def project = project('root', null, Stub(GradleInternal))
+
+        when:
+        def isolatedProject = project.isolated
+
+        then:
+        isolatedProject.name == 'root'
+        isolatedProject.path == ':'
+        isolatedProject.projectDirectory == new File('project')
+        isolatedProject.rootDirectory == new File('project')
+    }
+
     def "has useful toString and displayName and paths"() {
         def rootBuild = Stub(GradleInternal)
         rootBuild.isRootBuild() >> true
