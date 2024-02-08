@@ -19,8 +19,8 @@ package org.gradle.caching.configuration.internal
 import org.gradle.caching.BuildCacheServiceFactory
 import org.gradle.caching.configuration.AbstractBuildCache
 import org.gradle.caching.configuration.BuildCache
+import org.gradle.caching.internal.DirectoryBuildCacheServiceFactory
 import org.gradle.caching.local.DirectoryBuildCache
-import org.gradle.caching.local.internal.DirectoryBuildCacheServiceFactory
 import org.gradle.internal.reflect.Instantiator
 import spock.lang.Specification
 

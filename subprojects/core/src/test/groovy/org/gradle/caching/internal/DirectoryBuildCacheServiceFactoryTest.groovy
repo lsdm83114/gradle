@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.gradle.caching.local.internal
+package org.gradle.caching.internal
 
 import org.gradle.api.internal.file.FileResolver
 import org.gradle.api.internal.file.TestFiles
@@ -25,6 +25,8 @@ import org.gradle.cache.internal.CleanupActionDecorator
 import org.gradle.cache.scopes.GlobalScopedCacheBuilderFactory
 import org.gradle.caching.BuildCacheServiceFactory
 import org.gradle.caching.local.DirectoryBuildCache
+import org.gradle.caching.local.internal.DirectoryBuildCacheFileStoreFactory
+import org.gradle.caching.local.internal.DirectoryBuildCacheService
 import org.gradle.internal.file.FileAccessTimeJournal
 import org.gradle.internal.resource.local.PathKeyFileStore
 import org.gradle.test.fixtures.file.CleanupTestDirectory

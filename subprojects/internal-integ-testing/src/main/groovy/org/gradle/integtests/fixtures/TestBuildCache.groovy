@@ -16,8 +16,8 @@
 
 package org.gradle.integtests.fixtures
 
+import org.gradle.caching.internal.DirectoryBuildCacheServiceFactory
 import org.gradle.caching.local.internal.BuildCacheTempFileStore
-import org.gradle.caching.local.internal.DirectoryBuildCacheServiceFactory
 import org.gradle.internal.hash.Hashing
 import org.gradle.test.fixtures.file.TestFile
 

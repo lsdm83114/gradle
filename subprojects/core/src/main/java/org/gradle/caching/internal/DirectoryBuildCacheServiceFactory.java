@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.gradle.caching.local.internal;
+package org.gradle.caching.internal;
 
 import org.gradle.api.UncheckedIOException;
 import org.gradle.api.internal.file.temp.TemporaryFileProvider;
@@ -29,6 +29,10 @@ import org.gradle.cache.scopes.GlobalScopedCacheBuilderFactory;
 import org.gradle.caching.BuildCacheService;
 import org.gradle.caching.BuildCacheServiceFactory;
 import org.gradle.caching.local.DirectoryBuildCache;
+import org.gradle.caching.local.internal.BuildCacheTempFileStore;
+import org.gradle.caching.local.internal.DefaultBuildCacheTempFileStore;
+import org.gradle.caching.local.internal.DirectoryBuildCacheFileStoreFactory;
+import org.gradle.caching.local.internal.DirectoryBuildCacheService;
 import org.gradle.internal.file.FileAccessTimeJournal;
 import org.gradle.internal.file.FileAccessTracker;
 import org.gradle.internal.file.PathToFileResolver;

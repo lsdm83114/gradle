@@ -16,19 +16,17 @@
 
 package org.gradle.kotlin.dsl
 
-import org.gradle.api.Action
-import org.gradle.caching.BuildCacheServiceFactory
-import org.gradle.caching.configuration.BuildCacheConfiguration
-import org.gradle.caching.http.HttpBuildCache
-import org.gradle.caching.local.DirectoryBuildCache
-import org.gradle.caching.local.internal.DirectoryBuildCacheServiceFactory
-
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.doNothing
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.inOrder
 import com.nhaarman.mockito_kotlin.mock
-
+import org.gradle.api.Action
+import org.gradle.caching.BuildCacheServiceFactory
+import org.gradle.caching.configuration.BuildCacheConfiguration
+import org.gradle.caching.http.HttpBuildCache
+import org.gradle.caching.internal.DirectoryBuildCacheServiceFactory
+import org.gradle.caching.local.DirectoryBuildCache
 import org.junit.Test
 
 
