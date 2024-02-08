@@ -21,6 +21,7 @@ dependencies {
     api(project(":resources"))
 
     implementation(libs.guava)
+    implementation(libs.commonsIo)
 
     testImplementation(project(":model-core"))
     testImplementation(project(":file-collections"))
