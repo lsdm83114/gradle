@@ -41,7 +41,7 @@ class SmokeIdeTests(model: CIBuildModel, stage: Stage) : BaseGradleBuildType(sta
         model = model,
         buildType = this,
         gradleTasks = ":smoke-ide-test:smokeIdeTest",
-        jvm = DefaultJvm(JvmVersion.java17, JvmVendor.openjdk)
+        buildJvm = DefaultJvm(JvmVersion.java17, JvmVendor.openjdk),
         extraParameters = buildScanTag("SmokeIdeTests"),
     )
 }) {
