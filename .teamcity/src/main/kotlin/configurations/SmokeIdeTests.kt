@@ -17,9 +17,6 @@
 package configurations
 
 import common.requiresNotEc2Agent
-import common.DefaultJvm
-import common.JvmVendor
-import common.JvmVersion
 import model.CIBuildModel
 import model.Stage
 
@@ -41,7 +38,6 @@ class SmokeIdeTests(model: CIBuildModel, stage: Stage) : BaseGradleBuildType(sta
         model = model,
         buildType = this,
         gradleTasks = ":smoke-ide-test:smokeIdeTest",
-        buildJvm = DefaultJvm(JvmVersion.java17, JvmVendor.openjdk),
         extraParameters = buildScanTag("SmokeIdeTests"),
     )
 }) {
