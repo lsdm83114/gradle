@@ -28,12 +28,12 @@ import org.gradle.api.internal.artifacts.DependencyManagementTestUtil
 import org.gradle.api.internal.attributes.AttributesSchemaInternal
 import org.gradle.api.internal.attributes.DefaultAttributesSchema
 import org.gradle.api.internal.attributes.ImmutableAttributes
-import org.gradle.internal.component.AmbiguousGraphVariantsException
-import org.gradle.internal.component.NoMatchingGraphVariantsException
+
 import org.gradle.internal.component.ResolutionFailureHandler
 import org.gradle.internal.component.external.model.ImmutableCapabilities
 import org.gradle.internal.component.external.model.ModuleComponentArtifactIdentifier
 import org.gradle.internal.component.external.model.ModuleComponentArtifactMetadata
+import org.gradle.internal.component.resolution.failure.exception.VariantSelectionException
 import org.gradle.util.SnapshotTestUtil
 import org.gradle.util.TestUtil
 import org.gradle.util.internal.TextUtil
@@ -88,7 +88,7 @@ class AttributeMatchingGraphArtifactVariantSelectorTest extends Specification {
         performSelection()
 
         then:
-        AmbiguousGraphVariantsException e = thrown()
+        VariantSelectionException e = thrown()
         failsWith(e, '''The consumer was configured to find attribute 'org.gradle.usage' with value 'java-api'. However we cannot choose between the following variants of org:lib:1.0:
   - api1
   - api2
@@ -111,7 +111,7 @@ All of them match the consumer attributes:
         performSelection()
 
         then:
-        NoMatchingGraphVariantsException e = thrown()
+        VariantSelectionException e = thrown()
         failsWith(e, '''No matching variant of org:lib:1.0 was found. The consumer was configured to find attribute 'org.gradle.usage' with value 'cplusplus-headers' but:
   - Variant 'api':
       - Incompatible because this component declares attribute 'org.gradle.usage' with value 'java-api' and the consumer needed attribute 'org.gradle.usage' with value 'cplusplus-headers\'
@@ -145,7 +145,7 @@ All of them match the consumer attributes:
         performSelection()
 
         then:
-        NoMatchingGraphVariantsException e = thrown()
+        VariantSelectionException e = thrown()
         failsWith(e, '''No matching variant of org:lib:1.0 was found. The consumer was configured to find attribute 'org.gradle.usage' with value 'cplusplus-headers' but:
   - Variant 'default':
       - Incompatible because this component declares attribute 'org.gradle.usage' with value 'java-api' and the consumer needed attribute 'org.gradle.usage' with value 'cplusplus-headers\'''')
@@ -219,7 +219,7 @@ All of them match the consumer attributes:
         performSelection()
 
         then:
-        AmbiguousGraphVariantsException e = thrown()
+        VariantSelectionException e = thrown()
         failsWith(e, '''The consumer was configured to find attribute 'org.gradle.usage' with value 'java-api'. However we cannot choose between the following variants of org:lib:1.0:
   - api1
   - api2
@@ -353,7 +353,7 @@ All of them match the consumer attributes:
         performSelection()
 
         then:
-        AmbiguousGraphVariantsException e = thrown()
+        VariantSelectionException e = thrown()
         failsWith(e, '''The consumer was configured to find attribute 'org.gradle.usage' with value 'java-api'. However we cannot choose between the following variants of org:lib:1.0:
   - first
   - second
