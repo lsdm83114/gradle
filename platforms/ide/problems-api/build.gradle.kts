@@ -43,6 +43,7 @@ dependencies {
     api(libs.guava)
     api(libs.inject)
     api(libs.jsr305)
+    implementation(libs.commonsLang)
 
     testImplementation(project(":logging"))
     integTestImplementation(project(":internal-testing"))

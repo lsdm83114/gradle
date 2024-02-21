@@ -20,8 +20,8 @@ import org.gradle.api.problems.ProblemReporter;
 import org.gradle.api.problems.ProblemSpec;
 import org.gradle.api.problems.Problems;
 import org.gradle.api.problems.Severity;
-import org.gradle.api.problems.SharedProblemGroup;
 import org.gradle.api.problems.internal.DefaultProblemId;
+import org.gradle.api.problems.internal.GradleCoreProblemGroup;
 
 import javax.tools.Diagnostic;
 import javax.tools.DiagnosticListener;
@@ -54,7 +54,7 @@ public class DiagnosticToProblemListener implements DiagnosticListener<JavaFileO
 
         problemReporter.reporting(problem -> {
             ProblemSpec spec = problem
-                .id(DefaultProblemId.from(SharedProblemGroup.JAVA_COMPILATION.getId(), SharedProblemGroup.JAVA_COMPILATION.getDisplayName(), SharedProblemGroup.COMPILATION))
+                .id(DefaultProblemId.from(GradleCoreProblemGroup.JAVA_COMPILATION.getId(), GradleCoreProblemGroup.JAVA_COMPILATION.getDisplayName(), GradleCoreProblemGroup.COMPILATION))
                 .severity(severity)
                 .details(message);
             // We only set the location if we have a resource to point to

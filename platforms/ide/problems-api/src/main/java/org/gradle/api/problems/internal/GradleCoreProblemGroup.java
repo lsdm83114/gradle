@@ -17,48 +17,25 @@
 package org.gradle.api.problems.internal;
 
 import org.gradle.api.problems.ProblemGroup;
-import org.gradle.api.problems.SharedProblemGroup;
 
 import javax.annotation.Nullable;
 
 public enum GradleCoreProblemGroup implements ProblemGroup {
-
-    /**
-     * TODO javadoc.
-     *
-     * @since 8.8
-     */
+    // root groups
+    DEPRECATION("deprecation", "Deprecation"),
     VALIDATION("validation", "Validation"),
-    /**
-     * TODO javadoc.
-     *
-     * @since 8.8
-     */
-    TYPE_VALIDATION("gradle-type-validation", "Gradle type validation", VALIDATION),
-    /**
-     * TODO javadoc.
-     *
-     * @since 8.8
-     */
-    PROPERTY_VALIDATION("gradle-property-validation", "Gradle property validation", VALIDATION),
-    /**
-     * TODO javadoc.
-     *
-     * @since 8.8
-     */
-    GROOVY_DSL_COMPILATION("groovy-dsl", "Groovy DSL script compilation", SharedProblemGroup.COMPILATION),
-    /**
-     * TODO javadoc.
-     *
-     * @since 8.8
-     */
     TASK_SELECTION("task-selection", "Task selection"),
-    /**
-     * TODO javadoc.
-     *
-     * @since 8.8
-     */
-    DEPENDENCY_VERSION_CATALOG("dependency-version-catalog", "Version catalog", null);
+    COMPILATION("compilation", "Compilation"),
+    DEPENDENCY_VERSION_CATALOG("dependency-version-catalog", "Version catalog", null),
+
+    // validation subgroups
+    TYPE_VALIDATION("type-validation", "Gradle type validation", VALIDATION),
+
+    PROPERTY_VALIDATION("property-validation", "Gradle property validation", VALIDATION),
+
+    // compilation subgroup
+    GROOVY_DSL_COMPILATION("groovy-dsl", "Groovy DSL script compilation", COMPILATION),
+    JAVA_COMPILATION("java", "Java compilation", COMPILATION);
 
     private final String id;
     private final String displayName;

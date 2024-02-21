@@ -16,9 +16,11 @@
 
 package org.gradle.api.problems;
 
+import org.apache.commons.lang.StringUtils;
 import org.gradle.api.Incubating;
 
 import javax.annotation.Nullable;
+import java.util.Locale;
 
 /**
  * TODO javadoc.
@@ -29,44 +31,23 @@ import javax.annotation.Nullable;
 public enum SharedProblemGroup implements ProblemGroup {
 
     /**
-     * TODO javadoc.
+     * A generic problem category. All problems IDs not configuring any group will be automatically use this group.
      *
      * @since 8.8
      */
-    GENERIC("generic", "Generic"),
-
-    /**
-     * TODO javadoc.
-     *
-     * @since 8.8
-     */
-    DEPRECATION("deprecation", "Deprecation"),
-
-    /**
-     * TODO javadoc.
-     *
-     * @since 8.8
-     */
-    COMPILATION("compilation", "Compilation"),
-
-    /**
-     * TODO javadoc.
-     *
-     * @since 8.8
-     */
-    JAVA_COMPILATION("java", "Java compilation", COMPILATION); // TODO  move internal validation errors to separate internal class
+    GENERIC();
 
     private final String id;
     private final String displayName;
     private final ProblemGroup parent;
 
-    SharedProblemGroup(String id, String displayName) {
-        this(id, displayName, null);
+    SharedProblemGroup() {
+        this(null);
     }
 
-    SharedProblemGroup(String id, String displayName, @Nullable ProblemGroup parent) {
-        this.id = id;
-        this.displayName = displayName;
+    SharedProblemGroup(@Nullable ProblemGroup parent) {
+        this.id = StringUtils.lowerCase(name(), Locale.ROOT);
+        this.displayName = StringUtils.capitalize(this.id);
         this.parent = parent;
     }
 

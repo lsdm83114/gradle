@@ -22,8 +22,8 @@ import org.gradle.api.internal.DocumentationRegistry;
 import org.gradle.api.logging.configuration.WarningMode;
 import org.gradle.api.problems.ProblemSpec;
 import org.gradle.api.problems.Problems;
-import org.gradle.api.problems.SharedProblemGroup;
 import org.gradle.api.problems.internal.DefaultProblemId;
+import org.gradle.api.problems.internal.GradleCoreProblemGroup;
 import org.gradle.api.problems.internal.InternalProblemReporter;
 import org.gradle.api.problems.internal.InternalProblemSpec;
 import org.gradle.api.problems.internal.InternalProblems;
@@ -92,7 +92,7 @@ public class LoggingDeprecatedFeatureHandler implements FeatureHandler<Deprecate
                 @Override
                 public void execute(InternalProblemSpec builder) {
                     ProblemSpec problemSpec = builder
-                        .id(DefaultProblemId.from("deprecated-feature-used", usage.getSummary(), SharedProblemGroup.DEPRECATION)) // TODO verify how can we get an id/label independent from the context
+                        .id(DefaultProblemId.from("deprecated-feature-used", usage.getSummary(), GradleCoreProblemGroup.DEPRECATION)) // TODO verify how can we get an id/label independent from the context
                         .contextualLabel(usage.getSummary())
                         .documentedAt(usage.getDocumentationUrl());
                     addPossibleLocation(diagnostics, problemSpec);
