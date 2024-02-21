@@ -33,21 +33,28 @@ public enum SharedProblemGroup implements ProblemGroup {
      *
      * @since 8.8
      */
-    DEPRECATION("deprecation", "Deprecation", null),
+    GENERIC("generic", "Generic"),
 
     /**
      * TODO javadoc.
      *
      * @since 8.8
      */
-    COMPILATION("compilation", "Compilation", null),
+    DEPRECATION("deprecation", "Deprecation"),
 
     /**
      * TODO javadoc.
      *
      * @since 8.8
      */
-    VALIDATION("validation", "Validation", null),
+    COMPILATION("compilation", "Compilation"),
+
+    /**
+     * TODO javadoc.
+     *
+     * @since 8.8
+     */
+    VALIDATION("validation", "Validation"),
 
     /**
      * TODO javadoc.
@@ -82,7 +89,7 @@ public enum SharedProblemGroup implements ProblemGroup {
      *
      * @since 8.8
      */
-    TASK_SELECTION("task-selection", "Task selection", null),
+    TASK_SELECTION("task-selection", "Task selection"),
 
     /**
      * TODO javadoc.
@@ -95,12 +102,15 @@ public enum SharedProblemGroup implements ProblemGroup {
     private final String displayName;
     private final ProblemGroup parent;
 
+    SharedProblemGroup(String id, String displayName) {
+        this(id, displayName, null);
+    }
+
     SharedProblemGroup(String id, String displayName, @Nullable ProblemGroup parent) {
         this.id = id;
         this.displayName = displayName;
         this.parent = parent;
     }
-
 
     @Override
     public String getId() {

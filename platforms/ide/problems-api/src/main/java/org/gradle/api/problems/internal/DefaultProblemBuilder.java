@@ -21,6 +21,7 @@ import com.google.common.collect.ImmutableMap;
 import org.gradle.api.problems.ProblemGroup;
 import org.gradle.api.problems.ProblemId;
 import org.gradle.api.problems.Severity;
+import org.gradle.api.problems.SharedProblemGroup;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -200,13 +201,13 @@ public class DefaultProblemBuilder implements InternalProblemBuilder {
     @Override
     public InternalProblemBuilder id(String label) {
         // TODO maybe attach an snythetic root group
-        this.id = DefaultProblemId.from(label, label, null);
+        this.id = DefaultProblemId.from(label, label, SharedProblemGroup.GENERIC);
         return this;
     }
 
     @Override
     public InternalProblemBuilder id(String id, String displayName) {
-        this.id = DefaultProblemId.from(id, displayName, null);
+        this.id = DefaultProblemId.from(id, displayName, SharedProblemGroup.GENERIC);
         return this;
     }
 
