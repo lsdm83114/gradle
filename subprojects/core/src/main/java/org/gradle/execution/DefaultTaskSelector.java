@@ -22,8 +22,8 @@ import org.gradle.api.internal.project.ProjectState;
 import org.gradle.api.logging.Logger;
 import org.gradle.api.logging.Logging;
 import org.gradle.api.problems.Severity;
-import org.gradle.api.problems.SharedProblemGroup;
 import org.gradle.api.problems.internal.DefaultProblemId;
+import org.gradle.api.problems.internal.GradleCoreProblemGroup;
 import org.gradle.api.problems.internal.InternalProblemBuilder;
 import org.gradle.api.problems.internal.InternalProblems;
 import org.gradle.api.specs.Spec;
@@ -102,7 +102,7 @@ public class DefaultTaskSelector implements TaskSelector {
             matcher.formatErrorMessage("task", searchContext));
 
         throw getProblemsService().getInternalReporter().throwing(builder -> ((InternalProblemBuilder)builder) // TODO (donat) fix internal reporter or expose contextualLabel on public API
-            .id(DefaultProblemId.from("no-matches", "cannot locate task", SharedProblemGroup.TASK_SELECTION))
+            .id(DefaultProblemId.from("no-matches", "cannot locate task", GradleCoreProblemGroup.TASK_SELECTION))
             .contextualLabel(message)
             .fileLocation(Objects.requireNonNull(context.getOriginalPath().getName()))
             .severity(Severity.ERROR)

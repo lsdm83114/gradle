@@ -41,8 +41,8 @@ import org.gradle.api.logging.Logger;
 import org.gradle.api.logging.Logging;
 import org.gradle.api.model.ObjectFactory;
 import org.gradle.api.problems.ProblemSpec;
-import org.gradle.api.problems.SharedProblemGroup;
 import org.gradle.api.problems.internal.DefaultProblemId;
+import org.gradle.api.problems.internal.GradleCoreProblemGroup;
 import org.gradle.api.problems.internal.InternalProblemSpec;
 import org.gradle.api.problems.internal.InternalProblems;
 import org.gradle.api.problems.internal.Problem;
@@ -216,7 +216,7 @@ public abstract class DefaultVersionCatalogBuilder implements VersionCatalogBuil
 
     private static InternalProblemSpec configureVersionCatalogError(InternalProblemSpec builder, String message, VersionCatalogProblemId catalogProblemId) {
         return builder.
-            id(DefaultProblemId.from(TextUtil.screamingSnakeToKebabCase(catalogProblemId.name()), "version catalog error", SharedProblemGroup.DEPENDENCY_VERSION_CATALOG))
+            id(DefaultProblemId.from(TextUtil.screamingSnakeToKebabCase(catalogProblemId.name()), "version catalog error", GradleCoreProblemGroup.DEPENDENCY_VERSION_CATALOG))
             .contextualLabel(message)
             .documentedAt(userManual(VERSION_CATALOG_PROBLEMS, catalogProblemId.name().toLowerCase()))
             .severity(ERROR);

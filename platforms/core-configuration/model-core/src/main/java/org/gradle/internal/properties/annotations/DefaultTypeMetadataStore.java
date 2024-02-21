@@ -21,8 +21,8 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
 import com.google.common.reflect.TypeToken;
 import org.gradle.api.internal.GeneratedSubclasses;
-import org.gradle.api.problems.SharedProblemGroup;
 import org.gradle.api.problems.internal.DefaultProblemId;
+import org.gradle.api.problems.internal.GradleCoreProblemGroup;
 import org.gradle.cache.internal.CrossBuildInMemoryCache;
 import org.gradle.cache.internal.CrossBuildInMemoryCacheFactory;
 import org.gradle.internal.reflect.annotations.AnnotationCategory;
@@ -111,7 +111,7 @@ public class DefaultTypeMetadataStore implements TypeMetadataStore {
                 validationContext.visitPropertyProblem(problem ->
                     problem
                         .forProperty(propertyAnnotationMetadata.getPropertyName())
-                        .id(DefaultProblemId.from(TextUtil.screamingSnakeToKebabCase(MISSING_ANNOTATION), "property missing", SharedProblemGroup.PROPERTY_VALIDATION))
+                        .id(DefaultProblemId.from(TextUtil.screamingSnakeToKebabCase(MISSING_ANNOTATION), "property missing", GradleCoreProblemGroup.PROPERTY_VALIDATION))
                         .contextualLabel("is missing " + displayName)
                         .documentedAt(userManual("validation_problems", MISSING_ANNOTATION.toLowerCase()))
                         .severity(ERROR)
@@ -127,7 +127,7 @@ public class DefaultTypeMetadataStore implements TypeMetadataStore {
                 validationContext.visitPropertyProblem(problem ->
                     problem
                         .forProperty(propertyAnnotationMetadata.getPropertyName())
-                        .id(DefaultProblemId.from(TextUtil.screamingSnakeToKebabCase(ANNOTATION_INVALID_IN_CONTEXT), "is annotated with invalid property type", SharedProblemGroup.PROPERTY_VALIDATION))
+                        .id(DefaultProblemId.from(TextUtil.screamingSnakeToKebabCase(ANNOTATION_INVALID_IN_CONTEXT), "is annotated with invalid property type", GradleCoreProblemGroup.PROPERTY_VALIDATION))
                         .contextualLabel(String.format("is annotated with invalid property type @%s", propertyType.getSimpleName()))
                         .documentedAt(userManual("validation_problems", ANNOTATION_INVALID_IN_CONTEXT.toLowerCase()))
                         .severity(ERROR)
@@ -149,7 +149,7 @@ public class DefaultTypeMetadataStore implements TypeMetadataStore {
                     validationContext.visitPropertyProblem(problem ->
                         problem
                             .forProperty(propertyAnnotationMetadata.getPropertyName())
-                            .id(DefaultProblemId.from(TextUtil.screamingSnakeToKebabCase(INCOMPATIBLE_ANNOTATIONS), "Wrong property annotation", SharedProblemGroup.PROPERTY_VALIDATION))
+                            .id(DefaultProblemId.from(TextUtil.screamingSnakeToKebabCase(INCOMPATIBLE_ANNOTATIONS), "Wrong property annotation", GradleCoreProblemGroup.PROPERTY_VALIDATION))
                             .contextualLabel("is annotated with @" + annotationType.getSimpleName() + " but that is not allowed for '" + propertyType.getSimpleName() + "' properties")
                             .documentedAt(userManual("validation_problems", INCOMPATIBLE_ANNOTATIONS.toLowerCase()))
                             .severity(ERROR)
@@ -159,7 +159,7 @@ public class DefaultTypeMetadataStore implements TypeMetadataStore {
                     validationContext.visitPropertyProblem(problem ->
                         problem
                             .forProperty(propertyAnnotationMetadata.getPropertyName())
-                            .id(DefaultProblemId.from(TextUtil.screamingSnakeToKebabCase(ANNOTATION_INVALID_IN_CONTEXT), "is annotated with invalid modifier", SharedProblemGroup.PROPERTY_VALIDATION))
+                            .id(DefaultProblemId.from(TextUtil.screamingSnakeToKebabCase(ANNOTATION_INVALID_IN_CONTEXT), "is annotated with invalid modifier", GradleCoreProblemGroup.PROPERTY_VALIDATION))
                             .contextualLabel(String.format("is annotated with invalid modifier @%s", annotationType.getSimpleName()))
                             .documentedAt(userManual("validation_problems", ANNOTATION_INVALID_IN_CONTEXT.toLowerCase()))
                             .severity(ERROR)

@@ -17,8 +17,8 @@
 package org.gradle.internal.properties.annotations;
 
 import org.gradle.api.problems.Severity;
-import org.gradle.api.problems.SharedProblemGroup;
 import org.gradle.api.problems.internal.DefaultProblemId;
+import org.gradle.api.problems.internal.GradleCoreProblemGroup;
 import org.gradle.internal.deprecation.Documentation;
 import org.gradle.internal.reflect.validation.TypeValidationContext;
 
@@ -48,7 +48,7 @@ public abstract class AbstractTypeAnnotationHandler implements TypeAnnotationHan
     ) {
         visitor.visitTypeProblem(problem ->
             problem.withAnnotationType(classWithAnnotationAttached)
-                .id(DefaultProblemId.from("invalid-use-of-type-annotation", "is incorrectly annotated", SharedProblemGroup.TYPE_VALIDATION))
+                .id(DefaultProblemId.from("invalid-use-of-type-annotation", "is incorrectly annotated", GradleCoreProblemGroup.TYPE_VALIDATION))
                 .contextualLabel("is incorrectly annotated with @" + annotationType.getSimpleName())
                 .documentedAt(Documentation.userManual("validation_problems", "invalid_use_of_cacheable_annotation"))
                 .severity(Severity.ERROR)

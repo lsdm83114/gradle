@@ -17,8 +17,8 @@
 package org.gradle.internal.execution.steps
 
 import org.gradle.api.problems.Severity
-import org.gradle.api.problems.SharedProblemGroup
 import org.gradle.api.problems.internal.DefaultProblemId
+import org.gradle.api.problems.internal.GradleCoreProblemGroup
 import org.gradle.api.problems.internal.Problem
 import org.gradle.internal.execution.WorkValidationContext
 import org.gradle.internal.execution.WorkValidationException
@@ -79,7 +79,7 @@ class ValidateStepTest extends StepSpec<BeforeExecutionContext> implements Valid
             validationContext.forType(JobType, true).visitTypeProblem {
                 it
                     .withAnnotationType(Object)
-                    .id(DefaultProblemId.from("test-problem", "Validation error", SharedProblemGroup.VALIDATION))
+                    .id(DefaultProblemId.from("test-problem", "Validation error", GradleCoreProblemGroup.VALIDATION))
                     .documentedAt(userManual("id", "section"))
                     .details("Test")
                     .severity(Severity.ERROR)
@@ -108,7 +108,7 @@ class ValidateStepTest extends StepSpec<BeforeExecutionContext> implements Valid
             validationContext.forType(JobType, true).visitTypeProblem {
                 it
                     .withAnnotationType(Object)
-                    .id(DefaultProblemId.from("test-problem-1", "Validation error #1", SharedProblemGroup.VALIDATION))
+                    .id(DefaultProblemId.from("test-problem-1", "Validation error #1", GradleCoreProblemGroup.VALIDATION))
                     .documentedAt(userManual("id", "section"))
                     .severity(Severity.ERROR)
                     .details("Test")
@@ -116,7 +116,7 @@ class ValidateStepTest extends StepSpec<BeforeExecutionContext> implements Valid
             validationContext.forType(SecondaryJobType, true).visitTypeProblem {
                 it
                     .withAnnotationType(Object)
-                    .id(DefaultProblemId.from("test-problem-2", "Validation error #2", SharedProblemGroup.VALIDATION))
+                    .id(DefaultProblemId.from("test-problem-2", "Validation error #2", GradleCoreProblemGroup.VALIDATION))
                     .documentedAt(userManual("id", "section"))
                     .severity(Severity.ERROR)
                     .details("Test")
@@ -136,7 +136,7 @@ class ValidateStepTest extends StepSpec<BeforeExecutionContext> implements Valid
             validationContext.forType(JobType, true).visitTypeProblem {
                 it
                     .withAnnotationType(Object)
-                    .id(DefaultProblemId.from("test-problem", "Validation warning", SharedProblemGroup.VALIDATION))
+                    .id(DefaultProblemId.from("test-problem", "Validation warning", GradleCoreProblemGroup.VALIDATION))
                     .documentedAt(userManual("id", "section"))
                     .severity(Severity.WARNING)
                     .details("Test")
@@ -172,7 +172,7 @@ class ValidateStepTest extends StepSpec<BeforeExecutionContext> implements Valid
             typeContext.visitTypeProblem {
                 it
                     .withAnnotationType(Object)
-                    .id(DefaultProblemId.from("test-problem", "Validation problem", SharedProblemGroup.VALIDATION))
+                    .id(DefaultProblemId.from("test-problem", "Validation problem", GradleCoreProblemGroup.VALIDATION))
                     .documentedAt(userManual("id", "section"))
                     .severity(Severity.ERROR)
                     .details("Test")
@@ -180,7 +180,7 @@ class ValidateStepTest extends StepSpec<BeforeExecutionContext> implements Valid
             typeContext.visitTypeProblem {
                 it
                     .withAnnotationType(Object)
-                    .id(DefaultProblemId.from("test-problem", "Validation problem", SharedProblemGroup.VALIDATION))
+                    .id(DefaultProblemId.from("test-problem", "Validation problem", GradleCoreProblemGroup.VALIDATION))
                     .documentedAt(userManual("id", "section"))
                     .severity(Severity.WARNING)
                     .details("Test")

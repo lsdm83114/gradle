@@ -21,8 +21,8 @@ import org.gradle.api.file.ConfigurableFileTree;
 import org.gradle.api.internal.GeneratedSubclass;
 import org.gradle.api.problems.ProblemSpec;
 import org.gradle.api.problems.Severity;
-import org.gradle.api.problems.SharedProblemGroup;
 import org.gradle.api.problems.internal.DefaultProblemId;
+import org.gradle.api.problems.internal.GradleCoreProblemGroup;
 import org.gradle.internal.properties.InputFilePropertyType;
 import org.gradle.internal.typeconversion.UnsupportedNotationException;
 import org.gradle.model.internal.type.ModelType;
@@ -177,7 +177,7 @@ public enum ValidationActions implements ValidationAction {
             String lowerKind = kind.toLowerCase();
             problem
                 .forProperty(propertyName)
-                .id(DefaultProblemId.from(TextUtil.screamingSnakeToKebabCase(UNEXPECTED_INPUT_FILE_TYPE), "input not allowed for property", SharedProblemGroup.PROPERTY_VALIDATION))
+                .id(DefaultProblemId.from(TextUtil.screamingSnakeToKebabCase(UNEXPECTED_INPUT_FILE_TYPE), "input not allowed for property", GradleCoreProblemGroup.PROPERTY_VALIDATION))
                 .contextualLabel(lowerKind + " '" + input + "' is not a " + lowerKind)
                 .documentedAt(userManual("validation_problems", "unexpected_input_file_type"))
                 .severity(Severity.ERROR)
@@ -193,7 +193,7 @@ public enum ValidationActions implements ValidationAction {
         context.visitPropertyProblem(problem ->
             problem
                 .forProperty(propertyName)
-                .id(DefaultProblemId.from(TextUtil.screamingSnakeToKebabCase(CANNOT_WRITE_OUTPUT), "property not writeable", SharedProblemGroup.PROPERTY_VALIDATION))
+                .id(DefaultProblemId.from(TextUtil.screamingSnakeToKebabCase(CANNOT_WRITE_OUTPUT), "property not writeable", GradleCoreProblemGroup.PROPERTY_VALIDATION))
                 .contextualLabel("is not writable because " + cause)
                 .documentedAt(userManual("validation_problems", CANNOT_WRITE_OUTPUT.toLowerCase()))
                 .severity(Severity.ERROR)
@@ -206,7 +206,7 @@ public enum ValidationActions implements ValidationAction {
         context.visitPropertyProblem(problem ->
             problem
                 .forProperty(propertyName)
-                .id(DefaultProblemId.from(TextUtil.screamingSnakeToKebabCase(CANNOT_WRITE_OUTPUT), "property is not writable", SharedProblemGroup.PROPERTY_VALIDATION))
+                .id(DefaultProblemId.from(TextUtil.screamingSnakeToKebabCase(CANNOT_WRITE_OUTPUT), "property is not writable", GradleCoreProblemGroup.PROPERTY_VALIDATION))
                 .contextualLabel("is not writable because '" + directory + "' is not a directory")
                 .documentedAt(userManual("validation_problems", CANNOT_WRITE_OUTPUT.toLowerCase()))
                 .severity(Severity.ERROR)
@@ -219,7 +219,7 @@ public enum ValidationActions implements ValidationAction {
         context.visitPropertyProblem(problem ->
             problem
                 .forProperty(propertyName)
-                .id(DefaultProblemId.from(TextUtil.screamingSnakeToKebabCase(CANNOT_WRITE_OUTPUT), "property is not writable", SharedProblemGroup.PROPERTY_VALIDATION))
+                .id(DefaultProblemId.from(TextUtil.screamingSnakeToKebabCase(CANNOT_WRITE_OUTPUT), "property is not writable", GradleCoreProblemGroup.PROPERTY_VALIDATION))
                 .contextualLabel("is not writable because '" + file + "' is not a file")
                 .documentedAt(userManual("validation_problems", CANNOT_WRITE_OUTPUT.toLowerCase()))
                 .details("Cannot write a file to a location pointing at a directory")
@@ -233,7 +233,7 @@ public enum ValidationActions implements ValidationAction {
         context.visitPropertyProblem(problem ->
             problem
                 .forProperty(propertyName)
-                .id(DefaultProblemId.from(TextUtil.screamingSnakeToKebabCase(CANNOT_WRITE_OUTPUT), "property is not writable", SharedProblemGroup.PROPERTY_VALIDATION))
+                .id(DefaultProblemId.from(TextUtil.screamingSnakeToKebabCase(CANNOT_WRITE_OUTPUT), "property is not writable", GradleCoreProblemGroup.PROPERTY_VALIDATION))
                 .contextualLabel("is not writable because '" + file + "' ancestor '" + ancestor + "' is not a directory")
                 .documentedAt(userManual("validation_problems", CANNOT_WRITE_OUTPUT.toLowerCase()))
                 .severity(Severity.ERROR)
@@ -259,7 +259,7 @@ public enum ValidationActions implements ValidationAction {
             context.visitPropertyProblem(problem ->
                 problem
                     .forProperty(propertyName)
-                    .id(DefaultProblemId.from(TextUtil.screamingSnakeToKebabCase(CANNOT_WRITE_TO_RESERVED_LOCATION), "points to a location which is managed by Gradle", SharedProblemGroup.PROPERTY_VALIDATION))
+                    .id(DefaultProblemId.from(TextUtil.screamingSnakeToKebabCase(CANNOT_WRITE_TO_RESERVED_LOCATION), "points to a location which is managed by Gradle", GradleCoreProblemGroup.PROPERTY_VALIDATION))
                     .contextualLabel("points to '" + location + "' which is managed by Gradle")
                     .documentedAt(userManual("validation_problems", CANNOT_WRITE_TO_RESERVED_LOCATION.toLowerCase()))
                     .severity(Severity.ERROR)
@@ -292,7 +292,7 @@ public enum ValidationActions implements ValidationAction {
         context.visitPropertyProblem(problem -> {
                 ProblemSpec describedProblem = problem
                     .forProperty(propertyName)
-                    .id(DefaultProblemId.from(TextUtil.screamingSnakeToKebabCase(UNSUPPORTED_NOTATION), "property has unsupported value", SharedProblemGroup.PROPERTY_VALIDATION))
+                    .id(DefaultProblemId.from(TextUtil.screamingSnakeToKebabCase(UNSUPPORTED_NOTATION), "property has unsupported value", GradleCoreProblemGroup.PROPERTY_VALIDATION))
                     .contextualLabel("has unsupported value '" + value + "'")
                     .documentedAt(userManual("validation_problems", UNSUPPORTED_NOTATION.toLowerCase()))
                     .severity(Severity.ERROR)

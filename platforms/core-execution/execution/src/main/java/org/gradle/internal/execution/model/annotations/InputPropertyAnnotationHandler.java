@@ -21,8 +21,8 @@ import org.gradle.api.file.FileCollection;
 import org.gradle.api.file.RegularFile;
 import org.gradle.api.file.RegularFileProperty;
 import org.gradle.api.problems.Severity;
-import org.gradle.api.problems.SharedProblemGroup;
 import org.gradle.api.problems.internal.DefaultProblemId;
+import org.gradle.api.problems.internal.GradleCoreProblemGroup;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.Optional;
 import org.gradle.internal.properties.PropertyValue;
@@ -76,7 +76,7 @@ public class InputPropertyAnnotationHandler extends AbstractInputPropertyAnnotat
             validationContext.visitPropertyProblem(problem ->
                 problem
                     .forProperty(propertyMetadata.getPropertyName())
-                    .id(DefaultProblemId.from(TextUtil.screamingSnakeToKebabCase(CANNOT_USE_OPTIONAL_ON_PRIMITIVE_TYPES), "Property should be annotated with @Optional", SharedProblemGroup.PROPERTY_VALIDATION))
+                    .id(DefaultProblemId.from(TextUtil.screamingSnakeToKebabCase(CANNOT_USE_OPTIONAL_ON_PRIMITIVE_TYPES), "Property should be annotated with @Optional", GradleCoreProblemGroup.PROPERTY_VALIDATION))
                     .contextualLabel(String.format("of type %s shouldn't be annotated with @Optional", valueType.getName()))
                     .documentedAt(userManual(VALIDATION_PROBLEMS, CANNOT_USE_OPTIONAL_ON_PRIMITIVE_TYPES.toLowerCase()))
                     .details("Properties of primitive type cannot be optional")
@@ -98,7 +98,7 @@ public class InputPropertyAnnotationHandler extends AbstractInputPropertyAnnotat
             validationContext.visitPropertyProblem(problem ->
                 problem
                     .forProperty(propertyMetadata.getPropertyName())
-                    .id(DefaultProblemId.from(TextUtil.screamingSnakeToKebabCase(INCORRECT_USE_OF_INPUT_ANNOTATION), "has @Input annotation used on property", SharedProblemGroup.PROPERTY_VALIDATION))
+                    .id(DefaultProblemId.from(TextUtil.screamingSnakeToKebabCase(INCORRECT_USE_OF_INPUT_ANNOTATION), "has @Input annotation used on property", GradleCoreProblemGroup.PROPERTY_VALIDATION))
                     .contextualLabel(String.format("has @Input annotation used on property of type '%s'", ModelType.of(valueType).getDisplayName()))
                     .documentedAt(userManual(VALIDATION_PROBLEMS, INCORRECT_USE_OF_INPUT_ANNOTATION.toLowerCase()))
                     .severity(Severity.ERROR)
@@ -116,7 +116,7 @@ public class InputPropertyAnnotationHandler extends AbstractInputPropertyAnnotat
             validationContext.visitPropertyProblem(problem ->
                 problem
                     .forProperty(propertyMetadata.getPropertyName())
-                    .id(DefaultProblemId.from(TextUtil.screamingSnakeToKebabCase(INCORRECT_USE_OF_INPUT_ANNOTATION), "has @Input annotation used on property", SharedProblemGroup.PROPERTY_VALIDATION))
+                    .id(DefaultProblemId.from(TextUtil.screamingSnakeToKebabCase(INCORRECT_USE_OF_INPUT_ANNOTATION), "has @Input annotation used on property", GradleCoreProblemGroup.PROPERTY_VALIDATION))
                     .contextualLabel(String.format("has @Input annotation used on property of type '%s'", ModelType.of(valueType).getDisplayName()))
                     .documentedAt(userManual(VALIDATION_PROBLEMS, INCORRECT_USE_OF_INPUT_ANNOTATION.toLowerCase()))
                     .severity(Severity.ERROR)
@@ -135,7 +135,7 @@ public class InputPropertyAnnotationHandler extends AbstractInputPropertyAnnotat
             validationContext.visitPropertyProblem(problem ->
                 problem
                     .forProperty(propertyMetadata.getPropertyName())
-                    .id(DefaultProblemId.from(TextUtil.screamingSnakeToKebabCase(UNSUPPORTED_VALUE_TYPE), "has @Input annotation used", SharedProblemGroup.PROPERTY_VALIDATION))
+                    .id(DefaultProblemId.from(TextUtil.screamingSnakeToKebabCase(UNSUPPORTED_VALUE_TYPE), "has @Input annotation used", GradleCoreProblemGroup.PROPERTY_VALIDATION))
                     .contextualLabel(String.format("has @Input annotation used on type '%s' or a property of this type", URL.class.getName()))
                     .documentedAt(userManual(VALIDATION_PROBLEMS, UNSUPPORTED_VALUE_TYPE.toLowerCase()))
                     .severity(WARNING)

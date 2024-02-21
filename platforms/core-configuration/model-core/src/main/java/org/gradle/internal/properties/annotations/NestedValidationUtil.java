@@ -18,8 +18,8 @@ package org.gradle.internal.properties.annotations;
 
 import com.google.common.collect.ImmutableSet;
 import org.gradle.api.NonNullApi;
-import org.gradle.api.problems.SharedProblemGroup;
 import org.gradle.api.problems.internal.DefaultProblemId;
+import org.gradle.api.problems.internal.GradleCoreProblemGroup;
 import org.gradle.internal.reflect.validation.TypeValidationContext;
 
 import java.util.Optional;
@@ -59,7 +59,7 @@ public class NestedValidationUtil {
             validationContext.visitPropertyProblem(problem ->
                 problem
                     .forProperty(propertyName)
-                    .id(DefaultProblemId.from("nested-type-unsupported", "with nested type", SharedProblemGroup.PROPERTY_VALIDATION))
+                    .id(DefaultProblemId.from("nested-type-unsupported", "with nested type", GradleCoreProblemGroup.PROPERTY_VALIDATION))
                     .contextualLabel("with nested type '" + beanType.getName() + "' is not supported")
                     .documentedAt(userManual("validation_problems", "unsupported_nested_type"))
                     .severity(WARNING)
@@ -100,7 +100,7 @@ public class NestedValidationUtil {
             validationContext.visitPropertyProblem(problem ->
                 problem
                     .forProperty(propertyName)
-                    .id(DefaultProblemId.from("nested-map-unsupported-key-type", "where key of nested map", SharedProblemGroup.PROPERTY_VALIDATION))
+                    .id(DefaultProblemId.from("nested-map-unsupported-key-type", "where key of nested map", GradleCoreProblemGroup.PROPERTY_VALIDATION))
                     .contextualLabel("where key of nested map is of type '" + keyType.getName() + "'")
                     .documentedAt(userManual("validation_problems", "unsupported_key_type_of_nested_map"))
                     .severity(WARNING)

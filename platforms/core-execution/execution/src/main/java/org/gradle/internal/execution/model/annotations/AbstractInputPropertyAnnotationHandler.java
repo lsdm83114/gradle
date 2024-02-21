@@ -20,8 +20,8 @@ import com.google.common.collect.ImmutableSet;
 import org.gradle.api.artifacts.result.ResolvedArtifactResult;
 import org.gradle.api.problems.ProblemSpec;
 import org.gradle.api.problems.Severity;
-import org.gradle.api.problems.SharedProblemGroup;
 import org.gradle.api.problems.internal.DefaultProblemId;
+import org.gradle.api.problems.internal.GradleCoreProblemGroup;
 import org.gradle.api.provider.Provider;
 import org.gradle.api.reflect.TypeOf;
 import org.gradle.internal.properties.annotations.AbstractPropertyAnnotationHandler;
@@ -68,7 +68,7 @@ abstract class AbstractInputPropertyAnnotationHandler extends AbstractPropertyAn
             validationContext.visitPropertyProblem(problem -> {
                     ProblemSpec describedProblem = problem
                         .forProperty(propertyMetadata.getPropertyName())
-                        .id(DefaultProblemId.from(TextUtil.screamingSnakeToKebabCase(UNSUPPORTED_VALUE_TYPE), "property with unsupported annotation", SharedProblemGroup.PROPERTY_VALIDATION))
+                        .id(DefaultProblemId.from(TextUtil.screamingSnakeToKebabCase(UNSUPPORTED_VALUE_TYPE), "property with unsupported annotation", GradleCoreProblemGroup.PROPERTY_VALIDATION))
                         .contextualLabel(
                             String.format(
                                 "has @%s annotation used on property of type '%s'",

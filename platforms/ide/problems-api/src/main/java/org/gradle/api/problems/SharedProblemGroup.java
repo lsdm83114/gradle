@@ -54,49 +54,7 @@ public enum SharedProblemGroup implements ProblemGroup {
      *
      * @since 8.8
      */
-    VALIDATION("validation", "Validation"),
-
-    /**
-     * TODO javadoc.
-     *
-     * @since 8.8
-     */
-    TYPE_VALIDATION("gradle-type-validation", "Gradle type validation", VALIDATION),
-
-    /**
-     * TODO javadoc.
-     *
-     * @since 8.8
-     */
-    PROPERTY_VALIDATION("gradle-property-validation", "Gradle property validation", VALIDATION),
-
-    /**
-     * TODO javadoc.
-     *
-     * @since 8.8
-     */
-    GROOVY_DSL_COMPILATION("groovy-dsl", "Groovy DSL script compilation", COMPILATION),
-
-    /**
-     * TODO javadoc.
-     *
-     * @since 8.8
-     */
-    JAVA_COMPILATION("java", "Java compilation", COMPILATION),
-
-    /**
-     * TODO javadoc.
-     *
-     * @since 8.8
-     */
-    TASK_SELECTION("task-selection", "Task selection"),
-
-    /**
-     * TODO javadoc.
-     *
-     * @since 8.8
-     */
-    DEPENDENCY_VERSION_CATALOG("dependency-version-catalog", "Version catalog", null); // TODO  move internal validation errors to separate internal class
+    JAVA_COMPILATION("java", "Java compilation", COMPILATION); // TODO  move internal validation errors to separate internal class
 
     private final String id;
     private final String displayName;

@@ -17,12 +17,48 @@
 package org.gradle.api.problems.internal;
 
 import org.gradle.api.problems.ProblemGroup;
+import org.gradle.api.problems.SharedProblemGroup;
 
 import javax.annotation.Nullable;
 
 public enum GradleCoreProblemGroup implements ProblemGroup {
 
-    ;
+    /**
+     * TODO javadoc.
+     *
+     * @since 8.8
+     */
+    VALIDATION("validation", "Validation"),
+    /**
+     * TODO javadoc.
+     *
+     * @since 8.8
+     */
+    TYPE_VALIDATION("gradle-type-validation", "Gradle type validation", VALIDATION),
+    /**
+     * TODO javadoc.
+     *
+     * @since 8.8
+     */
+    PROPERTY_VALIDATION("gradle-property-validation", "Gradle property validation", VALIDATION),
+    /**
+     * TODO javadoc.
+     *
+     * @since 8.8
+     */
+    GROOVY_DSL_COMPILATION("groovy-dsl", "Groovy DSL script compilation", SharedProblemGroup.COMPILATION),
+    /**
+     * TODO javadoc.
+     *
+     * @since 8.8
+     */
+    TASK_SELECTION("task-selection", "Task selection"),
+    /**
+     * TODO javadoc.
+     *
+     * @since 8.8
+     */
+    DEPENDENCY_VERSION_CATALOG("dependency-version-catalog", "Version catalog", null);
 
     private final String id;
     private final String displayName;

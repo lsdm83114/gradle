@@ -18,10 +18,10 @@ package org.gradle.plugin.devel.tasks.internal
 
 import com.google.gson.Gson
 import org.gradle.api.problems.Severity
-import org.gradle.api.problems.SharedProblemGroup
 import org.gradle.api.problems.internal.DefaultProblemId
 import org.gradle.api.problems.internal.DefaultProblemReporter
 import org.gradle.api.problems.internal.DocLink
+import org.gradle.api.problems.internal.GradleCoreProblemGroup
 import org.gradle.api.problems.internal.InternalProblemReporter
 import org.gradle.api.problems.internal.ProblemEmitter
 import spock.lang.Specification
@@ -34,7 +34,7 @@ class ValidationProblemSerializationTest extends Specification {
     def "can serialize and deserialize a validation problem"() {
         given:
         def problem = problemReporter.create {
-            it.id(DefaultProblemId.from("id", "label", SharedProblemGroup.VALIDATION))
+            it.id(DefaultProblemId.from("id", "label", GradleCoreProblemGroup.VALIDATION))
         }
 
         when:
@@ -56,7 +56,7 @@ class ValidationProblemSerializationTest extends Specification {
     def "can serialize and deserialize a validation problem with a location"() {
         given:
         def problem = problemReporter.create {
-            it.id(DefaultProblemId.from("type", "label", SharedProblemGroup.VALIDATION))
+            it.id(DefaultProblemId.from("type", "label", GradleCoreProblemGroup.VALIDATION))
                 .lineInFileLocation("location", 1, 2, 3)
         }
 
@@ -78,7 +78,7 @@ class ValidationProblemSerializationTest extends Specification {
     def "can serialize and deserialize a validation problem with a documentation link"() {
         given:
         def problem = problemReporter.create {
-            it.id(DefaultProblemId.from("id", "label", SharedProblemGroup.VALIDATION))
+            it.id(DefaultProblemId.from("id", "label", GradleCoreProblemGroup.VALIDATION))
                 .documentedAt(new TestDocLink())
                 .lineInFileLocation("location", 1, 1)
         }
@@ -118,7 +118,7 @@ class ValidationProblemSerializationTest extends Specification {
     def "can serialize and deserialize a validation problem with a cause"() {
         given:
         def problem = problemReporter.create {
-            it.id(DefaultProblemId.from("id", "label", SharedProblemGroup.VALIDATION))
+            it.id(DefaultProblemId.from("id", "label", GradleCoreProblemGroup.VALIDATION))
                 .withException(new RuntimeException("cause"))
         }
 
@@ -138,7 +138,7 @@ class ValidationProblemSerializationTest extends Specification {
     def "can serialize and deserialize a validation problem with a severity"(Severity severity) {
         given:
         def problem = problemReporter.create {
-            it.id(DefaultProblemId.from("id", "label", SharedProblemGroup.VALIDATION))
+            it.id(DefaultProblemId.from("id", "label", GradleCoreProblemGroup.VALIDATION))
                 .severity(severity)
         }
 
@@ -161,7 +161,7 @@ class ValidationProblemSerializationTest extends Specification {
     def "can serialize and deserialize a validation problem with a solution"() {
         given:
         def problem = problemReporter.create {
-            it.id(DefaultProblemId.from("id", "label", SharedProblemGroup.VALIDATION))
+            it.id(DefaultProblemId.from("id", "label", GradleCoreProblemGroup.VALIDATION))
                 .solution("solution 0")
                 .solution("solution 1")
         }
@@ -183,7 +183,7 @@ class ValidationProblemSerializationTest extends Specification {
     def "can serialize and deserialize a validation problem with additional data"() {
         given:
         def problem = problemReporter.create {
-            it.id(DefaultProblemId.from("id", "label", SharedProblemGroup.VALIDATION))
+            it.id(DefaultProblemId.from("id", "label", GradleCoreProblemGroup.VALIDATION))
                 .additionalData("key 1", "value 1")
                 .additionalData("key 2", "value 2")
         }
