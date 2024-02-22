@@ -78,7 +78,9 @@ public class SocketConnection<T> implements RemoteConnection<T> {
     @Override
     public T receive() throws MessageIOException {
         try {
-            return objectReader.read();
+            T read = objectReader.read();
+            System.err.println("read=" + read);
+            return read;
         } catch (EOFException e) {
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug("Discarding EOFException: {}", e.toString());
