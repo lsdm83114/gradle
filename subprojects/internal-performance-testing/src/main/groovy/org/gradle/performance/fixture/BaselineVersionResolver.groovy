@@ -21,7 +21,6 @@ import groovy.transform.CompileStatic
 import groovy.transform.TypeCheckingMode
 import org.gradle.integtests.fixtures.executer.GradleDistribution
 import org.gradle.integtests.fixtures.versions.ReleasedVersionDistributions
-import org.gradle.performance.results.ResultsStoreHelper
 import org.gradle.util.GradleVersion
 import org.junit.Assume
 
@@ -44,11 +43,7 @@ class BaselineVersionResolver {
 
         resolvedVersions.removeAll { !versionMeetsLowerBaseVersionRequirement(it, minimumBaseVersion) }
 
-        if (resolvedVersions.isEmpty()) {
-            Assume.assumeFalse("Ignore the test if all baseline versions are filtered out in Historical Performance Test", ResultsStoreHelper.isHistoricalChannel())
-        }
-
-        assert !resolvedVersions.isEmpty(): "No versions selected: ${versions}"
+        Assume.assumeFalse("Ignore the test if all baseline versions are filtered out", resolvedVersions.isEmpty())
 
         resolvedVersions
     }

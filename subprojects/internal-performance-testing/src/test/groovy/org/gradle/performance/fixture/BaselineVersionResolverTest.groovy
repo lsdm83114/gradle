@@ -22,6 +22,7 @@ import org.gradle.integtests.fixtures.versions.ReleasedVersionDistributions
 import org.gradle.performance.results.ResultsStoreHelper
 import org.gradle.util.GradleVersion
 import org.gradle.util.SetSystemProperties
+import org.junit.AssumptionViolatedException
 import org.junit.Rule
 import spock.lang.Specification
 
@@ -54,8 +55,8 @@ class BaselineVersionResolverTest extends Specification {
         toBaselineVersions(distributions, ['6.0-20190823180744+0000'], '6.1')
 
         then:
-        def e = thrown(AssertionError)
-        e.message.contains('No versions selected: [6.0-20190823180744+0000]')
+        def e = thrown(AssumptionViolatedException)
+        e.message.contains('Ignore the test if all baseline versions are filtered out')
     }
 
     def 'latest release is added if no versions specified'() {
