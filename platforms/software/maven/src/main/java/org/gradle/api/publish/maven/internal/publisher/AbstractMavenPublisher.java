@@ -71,6 +71,12 @@ abstract class AbstractMavenPublisher implements MavenPublisher {
 
         ModuleArtifactPublisher artifactPublisher = new ModuleArtifactPublisher(repository, localRepo, rootUri, groupId, artifactId, version);
 
+        publishArtifactsAndMetadata(publication, artifactPublisher);
+
+        publishPublicationMetadata(publication, repository, localRepo, version, artifactPublisher, groupId, artifactId);
+    }
+
+    private void publishPublicationMetadata(MavenNormalizedPublication publication, ExternalResourceRepository repository, boolean localRepo, String version, ModuleArtifactPublisher artifactPublisher, String groupId, String artifactId) {
         if (isSnapshot(version)) {
             ExternalResourceName snapshotMetadataPath = artifactPublisher.getSnapshotMetadataLocation();
             Metadata snapshotMetadata = createSnapshotMetadata(publication, groupId, artifactId, version, repository, snapshotMetadataPath);
@@ -84,6 +90,12 @@ abstract class AbstractMavenPublisher implements MavenPublisher {
             }
         }
 
+        ExternalResourceName externalResource = artifactPublisher.getMetadataLocation();
+        Metadata metadata = createMetadata(groupId, artifactId, version, repository, externalResource);
+        artifactPublisher.publish(externalResource, writeMetadataToTmpFile(metadata, "module-maven-metadata.xml"));
+    }
+
+    private static void publishArtifactsAndMetadata(MavenNormalizedPublication publication, ModuleArtifactPublisher artifactPublisher) {
         if (publication.getMainArtifact() != null) {
             artifactPublisher.publish(null, publication.getMainArtifact().getExtension(), publication.getMainArtifact().getFile());
         }
@@ -91,10 +103,6 @@ abstract class AbstractMavenPublisher implements MavenPublisher {
         for (MavenArtifact artifact : publication.getAdditionalArtifacts()) {
             artifactPublisher.publish(artifact.getClassifier(), artifact.getExtension(), artifact.getFile());
         }
-
-        ExternalResourceName externalResource = artifactPublisher.getMetadataLocation();
-        Metadata metadata = createMetadata(groupId, artifactId, version, repository, externalResource);
-        artifactPublisher.publish(externalResource, writeMetadataToTmpFile(metadata, "module-maven-metadata.xml"));
     }
 
     private Metadata createMetadata(String groupId, String artifactId, String version, ExternalResourceRepository repository, ExternalResourceName metadataResource) {
