@@ -43,7 +43,8 @@ import java.util.Set;
 public class DefaultCapabilitiesConflictHandler implements CapabilitiesConflictHandler {
     private final List<Resolver> resolvers;
     private final Map<String, Set<NodeState>> capabilityWithoutVersionToNodes = new HashMap<>();
-    private final Deque<CapabilityConflict> conflicts = new ArrayDeque<>();
+    private final Deque<String> conflicts = new ArrayDeque<>();
+    private final Map<String, CapabilityConflict> capabilityIdToConflict = new HashMap<>();
 
     public DefaultCapabilitiesConflictHandler(List<Resolver> resolvers) {
         this.resolvers = resolvers;
@@ -95,7 +96,17 @@ public class DefaultCapabilitiesConflictHandler implements CapabilitiesConflictH
                         return true;
                     }
                 };
-                conflicts.add(new CapabilityConflict(group, name, candidatesForConflict));
+                // We now have a conflict, let's see if we already have one for this capability
+                capabilityIdToConflict.compute(capability.getCapabilityId(), (k, v) -> {
+                    if (v == null) {
+                        // Need to enqueue the conflict
+                        conflicts.add(k);
+                    }
+                    // We can always use the new list, it must contain all the nodes from the previous conflict
+                    // If it does not, it means they are no logner in the graph
+                    v = new CapabilityConflict(group, name, candidatesForConflict);
+                    return v;
+                });
                 return conflict;
             }
         }
@@ -115,7 +126,9 @@ public class DefaultCapabilitiesConflictHandler implements CapabilitiesConflictH
 
     @Override
     public void resolveNextConflict(Action<ConflictResolutionResult> resolutionAction) {
-        CapabilityConflict conflict = conflicts.poll();
+        String capabilityInConflict = conflicts.poll();
+        CapabilityConflict conflict = capabilityIdToConflict.remove(capabilityInConflict);
+
         Details details = new Details(conflict);
         for (Resolver resolver : resolvers) {
             resolver.resolve(details);
@@ -141,7 +154,9 @@ public class DefaultCapabilitiesConflictHandler implements CapabilitiesConflictH
         if (conflicts.isEmpty()) {
             return false;
         }
-        return conflicts.stream().flatMap(capability -> capability.nodes.stream()).anyMatch(node -> node.getComponent().getId().equals(id));
+        return capabilityIdToConflict.values().stream()
+            .flatMap(capability -> capability.nodes.stream())
+            .anyMatch(node -> node.getComponent().getId().equals(id));
     }
 
     public static CapabilitiesConflictHandler.Candidate candidate(NodeState node, Capability capability, Collection<NodeState> implicitCapabilityProviders) {
