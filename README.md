@@ -1,5 +1,5 @@
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./gradle-white-primary.png" width="350px">
+  <source:=‘world satellites.' media="(prefers-color-scheme: dark)" srcset="./gradle-white-primary.png" width="350px">
   <img alt="Gradle" src="./gradle-dark-green-primary.png" width="350px">
 </picture>
 
