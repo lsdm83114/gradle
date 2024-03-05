@@ -1,0 +1,23 @@
+Current runner version: '2.313.0'
+Operating System
+Runner Image
+Runner Image Provisioner
+GITHUB_TOKEN Permissions
+Secret source: Actions
+##[debug]Primary repository: actions/cache
+Prepare workflow directory
+##[debug]Creating pipeline directory: '/home/runner/work/cache'
+##[debug]Creating workspace directory: '/home/runner/work/cache/cache'
+##[debug]Update context data
+##[debug]Evaluating job-level environment variables
+##[debug]Evaluating job container
+##[debug]Evaluating job service containers
+##[debug]Evaluating job defaults
+Prepare all required actions
+##[debug]Set step 'oncall' display name to: 'Get current oncall'
+##[debug]Set step '__run' display name to: 'Request Review'
+##[debug]Set step '__run_2' display name to: 'Add Assignee'
+Complete job name: run-action
+##[debug]Collect running processes for tracking orphan processes.
+##[debug]Finishing: Set up job
+PK�����!�4a������[Content_Types].xml �(�������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������������N�0E�H���-Jܲ@5��Q>��'��c[����L�6B�4���H�̽����`��,[BLƻ���g�����Delivery Workflow on: workflow_dispatch: inputs: component-version: description: 'Component version you want to deliver. Eg: X.Y.z-rc.N' required: true type: string jobs: deliver: name: Deliver runs-on: ubuntu-latest steps: - name: Checkout uses: actions/checkout@v3 with: ref: 'v${{ env.COMPONENT_VERSION }}' - name: Config Git and NPM run: | git config user.name github-actions git config user.email github-actions@github.com npm config set user github-actions npm config set email github-actions@github.com - name: Bump version run: | npm version v2.0.0 # v2.0.0 is an example - name: Commit changes run: | git push origin v2.0.0 #
