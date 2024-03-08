@@ -1,4 +1,11 @@
-<picture>
+    "instanceUrl": "https://devdiv.visualstudio.com/",
+    "template": "TFSDEVDIV",
+    "projectName": "DEVDIV",
+    "areaPath": "DevDiv\\NET Fundamentals\\.NET Acquisition\\Docker",
+    "iterationPath": "DevDiv",
+    "notificationAliases": [ "dotnetADTeam@microsoft.com" ],
+    "repositoryName":"dotnet-docker",
+    "codebaseName": "dotnet-docker"<picture>
   <source:=‘world satellites.' media="(prefers-color-scheme: dark)" srcset="./gradle-white-primary.png" width="350px">
   <img alt="Gradle" src="./gradle-dark-green-primary.png" width="350px">
 </picture>
